@@ -11,14 +11,9 @@
         </div>
 
         <div v-else class="row">
-            <div v-for="(post, index) in posts" :key="index" class="card col-12 mb-4" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">{{post.title}}</h5>
-                    <p class="card-text">{{cutText(post.content, 150)}}</p>
-                    <p class="card-text">{{post.category?post.category.name:'-'}}</p>
-                    <a href="#" class="btn btn-primary">Read more...</a>
-                </div>
-            </div> 
+            <MyPost v-for="(post, index) in posts" :key="index" :post="post"  >
+                
+            </MyPost> 
         </div>
 
         <nav aria-label="...">
@@ -40,8 +35,14 @@
 </template>
 
 <script>
+
+import MyPost from '../components/MyPost.vue';
+
 export default {
-    name: 'BlogPage',
+    name: 'PostsPage',
+    components:{
+        MyPost
+    },
     data() {
         return{
             posts:[ ],
@@ -68,15 +69,6 @@ export default {
                 this.lastPage = response.data.results.last_page;
             });
         },
-
-        //accorciare il testo 
-        cutText(text, maxLength){
-            if (text.length < maxLength){
-            return text;
-            } else {
-            return text.substring(0, maxLength) + '...';
-            }
-        }
     },
     mounted(){ 
         this.getPosts();
