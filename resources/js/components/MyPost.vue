@@ -5,7 +5,7 @@
             <h5 class="card-title">{{post.title}}</h5>
             <p class="card-text">{{cutText(post.content, 150)}}</p>
             <p class="card-text">{{post.category?post.category.name:'-'}}</p>
-            <a href="#" class="btn btn-primary">Read more...</a>
+            <router-link :to="{name: 'single-post', params: {slug: post.slug} }" class="btn btn-primary">Read more...</router-link>
         </div>
     </div> 
     
